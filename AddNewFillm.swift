@@ -126,7 +126,7 @@ class AddNewFilm: UIViewController {
         yearElement.nameText.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         yearElement.nameText.inputView = datePicker
         yearElement.nameText.inputAccessoryView = toolBar
-        yearElement.nameText.becomeFirstResponder() 
+        yearElement.nameText.becomeFirstResponder()
         titleElement.nameText.becomeFirstResponder()
         directorElement.nameText.becomeFirstResponder()
         mainView.addSubview(mainLabel)
@@ -320,22 +320,22 @@ class AddNewFilm: UIViewController {
         }
     }
     @objc func directorIsValid() {
-        
+
         let textField = directorElement.nameText
         var checkLetters = false
         var firstLetter = false
-        
-        let text :String = textField.text ?? ""
+
+        let text: String = textField.text ?? ""
         if text.count == 0 {
             directorValidation = false
             directorElement.nameLabel.textColor = .red
             directorElement.nameText.layer.borderWidth = 1.0
             directorElement.nameText.layer.borderColor = UIColor.red.cgColor
         } else {
-           
+
             let names = text.components(separatedBy: " ")
-            for str in names{
-                if str.count > 0{
+            for str in names {
+                if str.count > 0 {
                     firstLetter = str[0].isUppercase
                 }
                 for element in str {
@@ -345,11 +345,11 @@ class AddNewFilm: UIViewController {
                         checkLetters = false
                     }
                 }
-                if(!(checkLetters && firstLetter)){
+                if(!(checkLetters && firstLetter)) {
                     break
                 }
             }
-            
+
             checkLetters = checkLetters && firstLetter
             directorElement.nameText.layer.borderWidth = 1.0
             if(textField.text?.count ?? -1 >= 3) && (textField.text?.count ?? -1 <= 300) && checkLetters {
@@ -361,7 +361,7 @@ class AddNewFilm: UIViewController {
                 directorElement.nameLabel.textColor = .red
                 directorElement.nameText.layer.borderWidth = 1.0
                 directorElement.nameText.layer.borderColor = UIColor.red.cgColor
-                
+
             }
         }
 
@@ -369,9 +369,9 @@ class AddNewFilm: UIViewController {
 
     @objc
     private func editingChanged() {
-        
+
         if(titleValidation && yearValidation && directorValidation) {
-            
+
             saveButton.isEnabled = true
             filmsName = titleElement.nameText.text ?? ""
             DirectorName = directorElement.nameText.text ?? ""

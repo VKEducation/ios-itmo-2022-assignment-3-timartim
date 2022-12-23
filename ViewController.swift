@@ -39,9 +39,9 @@ class ViewController: UITableViewController {
         tableView.register(MyCell.self, forCellReuseIdentifier: cellID)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Добавить", style: .plain, target: self, action: #selector(loadAddScreen))
         tableView.translatesAutoresizingMaskIntoConstraints = false
-     
-        
-        
+
+
+
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
@@ -99,7 +99,7 @@ class ViewController: UITableViewController {
         let pair = Pair(first: addController.filmsName, second: addController.DirectorName)
         var pos = 0
         let arr = hashDates.contains(addController.date)
-        
+
         if(!arr) {
             listDates.append(addController.date)
             hashDates.insert(addController.date)
@@ -108,23 +108,23 @@ class ViewController: UITableViewController {
             dates.append(Array<Pair>())
             self.tableView.performBatchUpdates({
                 self.tableView.insertSections(IndexSet(integer: dates.count - 1), with: .automatic)
-                
+
             }, completion: nil)
             pos = dates.count - 1
             dates[dates.count - 1].append(pair)
         } else {
-            
-            for _ in listDates{
-                if(addController.date == listDates[pos]){
+
+            for _ in listDates {
+                if(addController.date == listDates[pos]) {
                     break
-                }else{
+                } else {
                     pos += 1
                 }
             }
             dates[pos].append(pair)
             marks[pos].append(addController.TotalStars)
         }
-        
+
         self.tableView.performBatchUpdates({
             self.tableView.insertRows(at: [IndexPath(row: dates[pos].count - 1, section: pos)],
                 with: .automatic)
